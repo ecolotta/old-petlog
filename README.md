@@ -31,4 +31,4 @@ web上ではそれまでの日々の記録や記念日の振り返りができ�
 愛犬家
 
 ## ページ遷移図
-https://xd.adobe.com/view/b9d5ecaa-95bd-40bd-a84f-58878ce7aa40-ec86/screen/f18500bf-1b30-4446-8187-f5fbb390773f
+https://xd.adobe.com/view/f14b6a32-4ee6-4b16-a041-73be6baffc24-a418/
