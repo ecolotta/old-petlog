@@ -34,4 +34,4 @@ web上ではそれまでの日々の記録や記念日の振り返りができ�
 https://xd.adobe.com/view/f14b6a32-4ee6-4b16-a041-73be6baffc24-a418/
 
 ## ER図
-https://i.gyazo.com/c87352840137d3c1d9163d1fe456eff4.png
+https://i.gyazo.com/1551aefb25fef66a1c29a32ba27ec7fc.png
