@@ -1,13 +1,9 @@
 class Api::V1::UsersController < ApplicationController
-  def create
-  end
+  def create; end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
-  def me
-  end
+  def me; end
 end
