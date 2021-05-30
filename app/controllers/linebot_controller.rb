@@ -45,118 +45,160 @@ class LinebotController < ApplicationController
 
           client.reply_message(event['replyToken'], message) # linktokenをクエリパラメータに渡したサービスログインフォームを返信
 
-        when 'フレックス' #リッチメニューからお世話登録を選択した時に出る選択肢
+        when 'フレックス' # リッチメニューからお世話登録を選択した時に出る選択肢
           message = {
-            "type": "flex",
-            "altText": "This is a Flex Message",
+            "type": 'flex',
+            "altText": 'This is a Flex Message',
             "contents": {
-              "type": "bubble",
+              "type": 'bubble',
               "body": {
-                "type": "box",
-                "layout": "vertical",
+                "type": 'box',
+                "layout": 'vertical',
                 "contents": [
                   {
-                    "type": "box",
-                    "layout": "horizontal",
+                    "type": 'box',
+                    "layout": 'horizontal',
                     "contents": [
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "postback",
-                          "label": "おもちゃ",
-                          "data": "hello"
+                          "type": 'postback',
+                          "label": 'ごはん',
+                          "data": 'care_type, 1'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       },
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": 'postback',
+                          "label": 'おさんぽ',
+                          "data": 'care_type, 2'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       }
                     ],
-                    "paddingAll": "sm",
-                    "spacing": "md",
-                    "position": "relative"
+                    "paddingAll": 'sm',
+                    "spacing": 'md',
+                    "position": 'relative'
                   },
                   {
-                    "type": "box",
-                    "layout": "horizontal",
+                    "type": 'box',
+                    "layout": 'horizontal',
                     "contents": [
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": 'postback',
+                          "label": 'おもちゃ',
+                          "data": 'care_type, 3'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       },
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": 'postback',
+                          "label": 'グルーミング',
+                          "data": 'care_type, 4'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       }
                     ],
-                    "paddingAll": "sm",
-                    "spacing": "md",
-                    "position": "relative"
+                    "paddingAll": 'sm',
+                    "spacing": 'md',
+                    "position": 'relative'
                   },
                   {
-                    "type": "box",
-                    "layout": "horizontal",
+                    "type": 'box',
+                    "layout": 'horizontal',
                     "contents": [
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": 'postback',
+                          "label": 'おくすり',
+                          "data": 'care_type, 5'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       },
                       {
-                        "type": "button",
+                        "type": 'button',
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": 'postback',
+                          "label": 'おそうじ',
+                          "data": 'care_type, 6'
                         },
-                        "color": "#008000",
-                        "style": "primary"
+                        "color": '#008000',
+                        "style": 'primary'
                       }
                     ],
-                    "paddingAll": "sm",
-                    "spacing": "md",
-                    "position": "relative"
+                    "paddingAll": 'sm',
+                    "spacing": 'md',
+                    "position": 'relative'
                   },
                   {
-                    "type": "box",
-                    "layout": "horizontal",
+                    "type": 'box',
+                    "layout": 'horizontal',
                     "contents": [
                       {
-                        "type": "image",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png"
+                        "type": 'button',
+                        "action": {
+                          "type": 'postback',
+                          "label": '芸の練習',
+                          "data": 'care_type, 7'
+                        },
+                        "color": '#008000',
+                        "style": 'primary'
                       },
                       {
-                        "type": "image",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png"
+                        "type": 'button',
+                        "action": {
+                          "type": 'postback',
+                          "label": '見つめ合い',
+                          "data": 'care_type, 8'
+                        },
+                        "color": '#008000',
+                        "style": 'primary'
                       }
                     ],
-                    "spacing": "md",
-                    "position": "relative"
+                    "paddingAll": 'sm',
+                    "spacing": 'md',
+                    "position": 'relative'
+                  },
+                  {
+                    "type": 'box',
+                    "layout": 'horizontal',
+                    "contents": [
+                      {
+                        "type": 'button',
+                        "action": {
+                          "type": 'postback',
+                          "label": '撫でた',
+                          "data": 'care_type, 9'
+                        },
+                        "color": '#008000',
+                        "style": 'primary'
+                      },
+                      {
+                        "type": 'button',
+                        "action": {
+                          "type": 'postback',
+                          "label": 'その他',
+                          "data": 'care_type, 10'
+                        },
+                        "color": '#008000',
+                        "style": 'primary'
+                      }
+                    ],
+                    "paddingAll": 'sm',
+                    "spacing": 'md',
+                    "position": 'relative'
                   }
                 ]
               }
@@ -166,7 +208,20 @@ class LinebotController < ApplicationController
           client.reply_message(event['replyToken'], message)
         end
 
-      when Line::Bot::Event::AccountLink #アカウント連携
+      when Line::Bot::Event::Postback # お世話ボタンが押された時にdog_careに保存する
+        user = User.find_by(line_id: event['source']['userId'])
+        dog = user.dogs.first
+        if event['postback']['data'].include?('care_type')
+          care_type_id = event['postback']['data'].split(',')[1].to_i
+          dog.dog_cares.create!(care_type_id: care_type_id)
+          message = {
+            type: 'text',
+            text: 'お世話を登録しました！'
+          }
+          client.reply_message(event['replyToken'], message)
+        end
+
+      when Line::Bot::Event::AccountLink # アカウント連携
         line_user_id = event['source']['type'] == 'user' && event['source']['userId']
         nonce = event['link']['result'] == 'ok' && event['link']['nonce']
         if line_user_id && nonce
@@ -177,7 +232,7 @@ class LinebotController < ApplicationController
     end
   end
 
-  # サービスログインフォーム
+  # サービスログインフォーム→アカウント連携用コントローラ作成し移動する
   def index
     @user = User.new
     @link_token = params[:linkToken] # クエリパラメータから取得
