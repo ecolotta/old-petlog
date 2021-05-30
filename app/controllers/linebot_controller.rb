@@ -63,8 +63,37 @@ class LinebotController < ApplicationController
                         "type": "button",
                         "action": {
                           "type": "postback",
+                          "label": "ごはん",
+                          "data": "1"
+                        },
+                        "color": "#008000",
+                        "style": "primary"
+                      },
+                      {
+                        "type": "button",
+                        "action": {
+                          "type": "postback",
+                          "label": "おさんぽ",
+                          "data": "2"
+                        },
+                        "color": "#008000",
+                        "style": "primary"
+                      }
+                    ],
+                    "paddingAll": "sm",
+                    "spacing": "md",
+                    "position": "relative"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                      {
+                        "type": "button",
+                        "action": {
+                          "type": "postback",
                           "label": "おもちゃ",
-                          "data": "hello"
+                          "data": "3"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -72,9 +101,9 @@ class LinebotController < ApplicationController
                       {
                         "type": "button",
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": "postback",
+                          "label": "グルーミング",
+                          "data": "4"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -91,9 +120,9 @@ class LinebotController < ApplicationController
                       {
                         "type": "button",
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": "postback",
+                          "label": "おくすり",
+                          "data": "5"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -101,9 +130,9 @@ class LinebotController < ApplicationController
                       {
                         "type": "button",
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": "postback",
+                          "label": "おそうじ",
+                          "data": "6"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -120,9 +149,9 @@ class LinebotController < ApplicationController
                       {
                         "type": "button",
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": "postback",
+                          "label": "芸の練習",
+                          "data": "7"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -130,9 +159,9 @@ class LinebotController < ApplicationController
                       {
                         "type": "button",
                         "action": {
-                          "type": "uri",
-                          "label": "action",
-                          "uri": "http://linecorp.com/"
+                          "type": "postback",
+                          "label": "見つめ合い",
+                          "data": "8"
                         },
                         "color": "#008000",
                         "style": "primary"
@@ -147,14 +176,27 @@ class LinebotController < ApplicationController
                     "layout": "horizontal",
                     "contents": [
                       {
-                        "type": "image",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png"
+                        "type": "button",
+                        "action": {
+                          "type": "postback",
+                          "label": "撫でた",
+                          "data": "9"
+                        },
+                        "color": "#008000",
+                        "style": "primary"
                       },
                       {
-                        "type": "image",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png"
+                        "type": "button",
+                        "action": {
+                          "type": "postback",
+                          "label": "その他",
+                          "data": "10"
+                        },
+                        "color": "#008000",
+                        "style": "primary"
                       }
                     ],
+                    "paddingAll": "sm",
                     "spacing": "md",
                     "position": "relative"
                   }
