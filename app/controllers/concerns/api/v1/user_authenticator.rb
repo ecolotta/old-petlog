@@ -16,5 +16,4 @@ module Api::V1::UserAuthenticator
 
     render json: { status: :error, message: :unauthorized }, status: :unauthorized
   end
-
 end
