@@ -9,6 +9,7 @@ import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router/index.js'
 import 'bootstrap/dist/css/bootstrap.css'
+import '../plugins/vee_validates'
 import axios from '../plugins/axios.js'
 import store from '../store/index.js'
 

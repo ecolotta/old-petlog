@@ -15,7 +15,10 @@ class Api::V1::UsersController < Api::ApplicationController
   def destroy; end
 
   def me
-    render json: current_user
+    json_string = []
+    json_string << current_user
+    json_string << current_user.dog if current_user.dog.present?
+    render json: json_string
   end
 
   private

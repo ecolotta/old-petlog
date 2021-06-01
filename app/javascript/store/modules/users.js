@@ -2,22 +2,30 @@ import axios from '../../plugins/axios.js'
 
 const state = {
  currentUser: null,
+ currentUsersDog: null,
 };
 const mutations = {
   setCurrentUser(state, user) {
-    this.currentUser = user
+    state.currentUser = user
+  },
+  setCurrentUsersDog(state, dog) {
+    state.currentUsersDog = dog
   }
 };
 const actions = {
   createUser( { commit }, user) {
     return axios
     .post('users', user)
-    // .then(res =>{ commit('addUser', res.data)})
+  },
+  createDog( {commit }, dog) {
+    return axios
+    .post('dogs', dog)
   },
   async loginUser( {commit }, user) {
     await axios
     .post('sessions', user)
     .then(res => {
+      console.log(res)
       localStorage.setItem('token', res.data.token)
       axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
     })
@@ -28,6 +36,7 @@ const actions = {
   logOutUser() {
     localStorage.deleteItem('token')
     this.currentUser = null
+    this.currentUsersDog = null
   },
   async fetchAuthUser({ commit, state }) {
     try{
@@ -40,9 +49,13 @@ const actions = {
         })
       if (!userResponse) return null
 
-      const authUser = userResponse.data
+      const authUser = userResponse.data[0]
+      const authDog = userResponse.data[1]
       if (authUser) {
         commit('setCurrentUser', authUser)
+        if (authDog) {
+          commit('setCurrentUsersDog', authDog)
+        }
         return authUser
       } else {
         commit('setCurrentUser', null)

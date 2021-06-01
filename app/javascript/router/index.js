@@ -4,6 +4,7 @@ import store from '../store'
 import Home from '../pages/top/index.vue'
 import RegisterUser from '../pages/register/user.vue'
 import Login from '../pages/login/index'
+import RegisterDog from '../pages/register/dog.vue'
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,12 @@ const routes = [
     path: '/login', 
     component: Login,
     name: 'LoginIndex',
-    // meta: { requiredAuth: true }
+    // 
+  },
+  { 
+    path: '/register_dog', 
+    component: RegisterDog,
+    meta: { requiredAuth: true }
   },
 ]
 
