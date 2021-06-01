@@ -1,5 +1,5 @@
 <template>
-  <div id="register-form">
+  <div id="register-form" class="container w-50 text-center">
     <div class="text-center">
       <h1>ユーザー登録</h1>
         <div class="form-group">

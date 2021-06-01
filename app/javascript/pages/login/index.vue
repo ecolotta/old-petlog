@@ -1,5 +1,5 @@
 <template>
-  <div id="register-form">
+  <div id="register-form" class="container w-50 text-center">
     <div class="text-center">
       <h1>ログイン</h1>
         <div class="form-group">
@@ -46,10 +46,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions("usersModule", ["createUser"]),
+    ...mapActions("usersModule", ["loginUser"]),
     async handleLoginUser() {
       try {
-        await this.createUser(this.user)
+        await this.loginUser(this.user)
       } catch (err) {
         console.log(err)
       }

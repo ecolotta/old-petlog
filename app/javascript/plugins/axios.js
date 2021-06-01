@@ -2,9 +2,6 @@ import axios from 'axios'
 
 const axiosInstance = axios.create({
   baseURL: 'api/v1',
-  // headers: {
-  //     'Authorization': `Bearer ${localStorage.token}`
-  // }
 })
 
 if (localStorage.token) {
