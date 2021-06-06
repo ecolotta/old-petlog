@@ -21,17 +21,18 @@ const actions = {
     return axios
     .post('dogs', dog)
   },
-  async loginUser( {commit }, user) {
+  async loginUser( {commit }) {
+    console.log("goodbye")
     await axios
-    .post('sessions', user)
+    .post('users/auth/line')
     .then(res => {
       console.log(res)
-      localStorage.setItem('token', res.data.token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+      // localStorage.setItem('token', res.data.token)
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
     })
-    const userResponse = await axios.get('me')
-    commit('setCurrentUser', userResponse.data)
-    console.log(this.currentUser)
+    // const userResponse = await axios.get('me')
+    // commit('setCurrentUser', userResponse.data)
+    // console.log(this.currentUser)
   },
   logOutUser() {
     localStorage.deleteItem('token')
