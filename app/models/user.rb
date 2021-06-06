@@ -1,17 +1,26 @@
-class User < ApplicationRecord
-  include JwtToken
+# frozen_string_literal: true
 
-  authenticates_with_sorcery!
-
-  attribute :password, :string
-  attribute :password_confirmation, :string
-
-  validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
-  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
-  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
-  
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :validatable,
+  devise :omniauthable, omniauth_providers: [:line]
 
   has_one :dog, dependent: :destroy
+
+  def self.decode(token)
+    JWT.decode token, Rails.application.credentials.secret_key_base
+  end
+
+  def create_tokens
+    payload = { user_id: id }
+    issue_token(payload.merge(exp: Time.current.to_i + 1.month))
+  end
+
+  private
+
+  def issue_token(payload)
+    JWT.encode payload, Rails.application.credentials.secret_key_base
+  end
 end

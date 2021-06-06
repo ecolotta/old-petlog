@@ -28,7 +28,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails'
 gem 'jwt'
 gem 'line-bot-api'
-gem 'sorcery'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-line'
+gem 'rack-cors'
+gem 'omniauth-rails_csrf_protection'
 
 
 group :development, :test do
