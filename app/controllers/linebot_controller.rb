@@ -22,28 +22,28 @@ class LinebotController < ApplicationController
 
     events.each do |event|
       case event
-      when Line::Bot::Event::Message # アカウント連携開始※ボタンなどに変更する
+      when Line::Bot::Event::Message
         case event.message['text']
-        when 'アカウント'
-          line_user_id = event['source']['userId']
-          create_token = client.create_link_token(line_user_id) # linktoken生成メソッド
-          link_token = JSON.parse(create_token.body.to_s)['linkToken'] # stringに変換
+        # when 'アカウント'
+        #   line_user_id = event['source']['userId']
+        #   create_token = client.create_link_token(line_user_id) # linktoken生成メソッド
+        #   link_token = JSON.parse(create_token.body.to_s)['linkToken'] # stringに変換
 
-          message = {
-            type: 'template',
-            altText: 'Account Link',
-            template: {
-              type: 'buttons',
-              text: 'Account Link',
-              actions: [{
-                type: 'uri',
-                label: 'Account Link',
-                uri: "https://ae9b048da230.ngrok.io/linebot/?linkToken=#{link_token}"
-              }]
-            }
-          }
+        #   message = {
+        #     type: 'template',
+        #     altText: 'Account Link',
+        #     template: {
+        #       type: 'buttons',
+        #       text: 'Account Link',
+        #       actions: [{
+        #         type: 'uri',
+        #         label: 'Account Link',
+        #         uri: "https://ae9b048da230.ngrok.io/linebot/?linkToken=#{link_token}"
+        #       }]
+        #     }
+        #   }
 
-          client.reply_message(event['replyToken'], message) # linktokenをクエリパラメータに渡したサービスログインフォームを返信
+        #   client.reply_message(event['replyToken'], message) # linktokenをクエリパラメータに渡したサービスログインフォームを返信
 
         when 'フレックス' # リッチメニューからお世話登録を選択した時に出る選択肢
           message = {
@@ -209,8 +209,9 @@ class LinebotController < ApplicationController
         end
 
       when Line::Bot::Event::Postback # お世話ボタンが押された時にdog_careに保存する
-        user = User.find_by(line_id: event['source']['userId'])
-        dog = user.dogs.first
+        
+        user = User.find_by(uid: event['source']['userId'])
+        dog = user.dog
         if event['postback']['data'].include?('care_type')
           care_type_id = event['postback']['data'].split(',')[1].to_i
           dog.dog_cares.create!(care_type_id: care_type_id)
@@ -221,28 +222,28 @@ class LinebotController < ApplicationController
           client.reply_message(event['replyToken'], message)
         end
 
-      when Line::Bot::Event::AccountLink # アカウント連携
-        line_user_id = event['source']['type'] == 'user' && event['source']['userId']
-        nonce = event['link']['result'] == 'ok' && event['link']['nonce']
-        if line_user_id && nonce
-          user = User.find_by(id: Rails.cache.read("lineAccountLink:#{nonce}")) # キャッシュに保存しているデータと一致していればuserを返す
-          user.update!(line_id: line_user_id) # 一致していないことはおかしいので失敗したら例外を返す
-        end
+      # when Line::Bot::Event::AccountLink # アカウント連携
+      #   line_user_id = event['source']['type'] == 'user' && event['source']['userId']
+      #   nonce = event['link']['result'] == 'ok' && event['link']['nonce']
+      #   if line_user_id && nonce
+      #     user = User.find_by(id: Rails.cache.read("lineAccountLink:#{nonce}")) # キャッシュに保存しているデータと一致していればuserを返す
+      #     user.update!(line_id: line_user_id) # 一致していないことはおかしいので失敗したら例外を返す
+      #   end
       end
     end
   end
 
-  # サービスログインフォーム→アカウント連携用コントローラ作成し移動する
-  def index
-    @user = User.new
-    @link_token = params[:linkToken] # クエリパラメータから取得
-  end
+  # # サービスログインフォーム→アカウント連携用コントローラ作成し移動する
+  # def index
+  #   @user = User.new
+  #   @link_token = params[:linkToken] # クエリパラメータから取得
+  # end
 
-  def create
-    user = login(params[:email], params[:password])
-    link_token = params[:link_token] # hiddentagから取得
-    nonce = SecureRandom.urlsafe_base64
-    Rails.cache.write("lineAccountLink:#{nonce}", user.id, expires_in: 10.minutes) # nonceをキャッシュに保存
-    redirect_to "https://access.line.me/dialog/bot/accountLink?linkToken=#{link_token}&nonce=#{nonce}"
-  end
+  # def create
+  #   user = login(params[:email], params[:password])
+  #   link_token = params[:link_token] # hiddentagから取得
+  #   nonce = SecureRandom.urlsafe_base64
+  #   Rails.cache.write("lineAccountLink:#{nonce}", user.id, expires_in: 10.minutes) # nonceをキャッシュに保存
+  #   redirect_to "https://access.line.me/dialog/bot/accountLink?linkToken=#{link_token}&nonce=#{nonce}"
+  # end
 end
