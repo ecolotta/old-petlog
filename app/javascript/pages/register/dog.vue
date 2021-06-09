@@ -66,13 +66,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions("usersModule", ["createDog"]),
+    ...mapActions("usersModule", ["createDog", "loginUser"]),
     async handleCreateDog() {
       try {
         await this.createDog(this.dog)
       } catch (err) {
         console.log(err)
       }
+      this.$router.push({ name: 'Calender' })
     },
   }
 }

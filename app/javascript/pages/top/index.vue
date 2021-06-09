@@ -10,6 +10,7 @@
           name="authenticity_token"
           type="hidden"
           :value="setCsrfToken">
+          <!-- formのヘッダーにcsrftokenを入れ込む -->
       <input class="btn btn-dark mt-5" type="submit" value="LINEログインで始める">
     </form>
   </div>
@@ -22,19 +23,19 @@ import { csrfToken } from 'rails-ujs'
 export default {
   data: function () {
     return {
-      message: "タスクを管理しよう！",
-      message2: "生活や仕事に関するタスクを見える化して抜け漏れを防ぎましょう。",
+      message: "愛犬のお世話を記録しよう",
+      message2: "LINEで手軽にお世話の記録ができます",
       csrfToken: ""
     }
   },
   computed: {
-    setCsrfToken() {
+    setCsrfToken() { //postリクエストを送るため
       this.csrfToken = csrfToken()
       return this.csrfToken
     }
   },
   methods: {
-    ...mapActions("usersModule", ["loginUser"]),
+    ...mapActions("usersModule", ["loginUser", "test"]),
     async handleLineLogin() {
       console.log(token)
       try {

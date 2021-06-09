@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[create update destroy]
-      # resources :sessions, only: %i[create]
       resources :dogs, only: %i[create update destroy]
       get 'me', to: 'users#me'
-      devise_for :users, controllers: { omniauth_callbacks: "api/v1/auth/omniauth_callbacks" }
+      get 'token', to: 'users#token'
+      get 'sign_out', to: "sessions#destroy"
+      devise_for :users, controllers: {omniauth_callbacks: "api/v1/auth/omniauth_callbacks"}
     end
   end
   post '/webhook' => 'linebot#webhook'

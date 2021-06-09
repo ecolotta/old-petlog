@@ -2,15 +2,22 @@ class Api::V1::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksCont
   def line
     @omniauth = request.env['omniauth.auth']
     @user = User.where(provider: @omniauth['provider'], uid: @omniauth['uid']).first
-    if @user && @user.dog.present?
+    if @user
       @user.update!(tokens: @omniauth['credentials'])
-      redirect_to root_path, flash: { token: @user.create_tokens }
-    elsif @user && @user.dog.nil?
-      redirect_to '/register_dog', flash: { token: @user.create_tokens }
     else
-      @user = User.create!(name: @omniauth['info']['name'], provider: @omniauth['provider'], uid: @omniauth['uid'])
-      redirect_to '/register_dog', flash: { token: @user.create_tokens }
+      @user = User.create!(
+                name: @omniauth['info']['name'],
+                provider: @omniauth['provider'],
+                uid: @omniauth['uid'],
+                password: Devise.friendly_token[0, 20],
+                email: Faker::Internet.email)
     end
+    sign_in(@user)
+    redirect_to '/redirect' #ログインとルート分けを行う
+  end
+
+  def get
+    render json: @token
   end
 
   # キャンセルした時にrootに遷移
