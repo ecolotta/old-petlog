@@ -38,7 +38,7 @@ export default {
     ...mapActions("usersModule",["logOutUser"]),
     handleUserLoguout() {
       this.logOutUser(this.currentUser)
-      this.$router.push({ path: '/' });
+      this.$router.go({path: '/', force: true}) //csfr対策のためリロード
     }
   }
   

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: %i[create update destroy]
       resources :dogs, only: %i[create update destroy]
+      resources :dog_cares
+      resources :care_types
       get 'me', to: 'users#me'
       get 'token', to: 'users#token'
       get 'sign_out', to: "sessions#destroy"

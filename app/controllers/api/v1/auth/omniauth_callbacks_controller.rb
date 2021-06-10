@@ -1,4 +1,5 @@
 class Api::V1::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  
   def line
     @omniauth = request.env['omniauth.auth']
     @user = User.where(provider: @omniauth['provider'], uid: @omniauth['uid']).first
@@ -12,12 +13,9 @@ class Api::V1::Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksCont
                 password: Devise.friendly_token[0, 20],
                 email: Faker::Internet.email)
     end
+    
     sign_in(@user)
     redirect_to '/redirect' #ログインとルート分けを行う
-  end
-
-  def get
-    render json: @token
   end
 
   # キャンセルした時にrootに遷移

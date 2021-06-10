@@ -9,7 +9,7 @@
       <input
           name="authenticity_token"
           type="hidden"
-          :value="setCsrfToken">
+          :value="token">
           <!-- formのヘッダーにcsrftokenを入れ込む -->
       <input class="btn btn-dark mt-5" type="submit" value="LINEログインで始める">
     </form>
@@ -25,25 +25,13 @@ export default {
     return {
       message: "愛犬のお世話を記録しよう",
       message2: "LINEで手軽にお世話の記録ができます",
-      csrfToken: ""
+      token: ""
     }
   },
-  computed: {
-    setCsrfToken() { //postリクエストを送るため
-      this.csrfToken = csrfToken()
-      return this.csrfToken
-    }
-  },
-  methods: {
-    ...mapActions("usersModule", ["loginUser", "test"]),
-    async handleLineLogin() {
-      console.log(token)
-      try {
-        await this.loginUser()
-      } catch (err) {
-        console.log(err)
-      }
-    },
+  created() {
+    this.token = csrfToken() //postリクエストを送るため
+    console.log(this.token)
+    return this.token
   }
 }
 </script>

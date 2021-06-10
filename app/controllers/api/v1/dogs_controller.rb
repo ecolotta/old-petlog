@@ -1,4 +1,4 @@
-class Api::V1::DogsController < ApplicationController
+class Api::V1::DogsController < Api::ApplicationController
   include Api::V1::UserAuthenticator
 
   before_action :authenticate!

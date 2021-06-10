@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::ApplicationController
   include Api::V1::UserAuthenticator
   before_action :authenticate_api_v1_user!, only: %i[token]
+  before_action :authenticate!, only: %i[me]
 
   def update; end
 
