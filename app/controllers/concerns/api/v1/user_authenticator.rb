@@ -4,9 +4,8 @@ module Api::V1::UserAuthenticator
   # リクエストの認証ヘッダーから渡ってくるJWTトークンをもとに 認証されたユーザを返す
   def current_user
     return @current_user if @current_user
-
     token = request.headers['Authorization'].split(' ').last
-    decoded_token = User.decode(token)
+    decoded_token = User.decode(token).first
     @current_user = User.find_by(id: decoded_token['user_id'])
   end
 

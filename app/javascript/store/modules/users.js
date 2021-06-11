@@ -21,22 +21,26 @@ const actions = {
     return axios
     .post('dogs', dog)
   },
-  async loginUser( {commit }, user) {
-    await axios
-    .post('sessions', user)
-    .then(res => {
-      console.log(res)
-      localStorage.setItem('token', res.data.token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
-    })
+  async loginUser( {commit }) {
+    try {
+      await axios
+      .get('token')
+      .then(res => { 
+        localStorage.setItem('token', res.data.token)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+      })
+    } catch (err) {
+      return null
+    }
     const userResponse = await axios.get('me')
-    commit('setCurrentUser', userResponse.data)
-    console.log(this.currentUser)
+    commit('setCurrentUser', userResponse.data[0])
+    commit('setCurrentUsersDog', userResponse.data[1])
   },
-  logOutUser() {
-    localStorage.deleteItem('token')
-    this.currentUser = null
-    this.currentUsersDog = null
+  logOutUser( {commit} ) {
+    axios.get('/sign_out')
+    localStorage.removeItem('token')
+    state.currentUser = null
+    state.currentUsersDog = null
   },
   async fetchAuthUser({ commit, state }) {
     try{
@@ -64,10 +68,11 @@ const actions = {
     } catch (err) {
       console.log(err)
     }
-  }
+  },
 };
 const getters = {
   currentUser: state => state.currentUser,
+  currentUsersDog: state => state.currentUsersDog,
 };
 
 export default {

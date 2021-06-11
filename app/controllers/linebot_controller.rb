@@ -1,4 +1,5 @@
 class LinebotController < ApplicationController
+  protect_from_forgery with: :null_session
   require 'line/bot'
   require 'net/http'
   require 'json'

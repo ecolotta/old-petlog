@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bootstrap": "4",
     "ngrok": "^4.0.1",
+    "rails-ujs": "^5.2.6",
     "vee-validate": "^3.4.8",
     "vue": "^2.6.12",
     "vue-eslint-parser": "^7.6.0",

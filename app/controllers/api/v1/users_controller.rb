@@ -1,14 +1,7 @@
 class Api::V1::UsersController < Api::ApplicationController
   include Api::V1::UserAuthenticator
-
-  def create
-    user = User.new(user_params)
-    if user.save
-      render json: user
-    else
-      render json: user.errors, status: :bad_request
-    end
-  end
+  before_action :authenticate_api_v1_user!, only: %i[token]
+  before_action :authenticate!, only: %i[me]
 
   def update; end
 
@@ -19,6 +12,26 @@ class Api::V1::UsersController < Api::ApplicationController
     json_string << current_user
     json_string << current_user.dog if current_user.dog.present?
     render json: json_string
+  end
+
+  def token
+    if current_api_v1_user
+      token = current_api_v1_user.create_tokens
+      json_string = { token: token }
+      render json: json_string
+    else
+      head :unauthorized
+    end
+  end
+
+  protected
+
+  def authenticate_api_v1_user! #エラー時の反応を変更
+    if api_v1_user_signed_in?
+      super
+    else
+      render json: { status: :error, message: :unauthorized }, status: :unauthorized
+    end
   end
 
   private
